@@ -4,7 +4,7 @@ import sys
 current_users = 0
 total_arrives = 0
 arrive_times_total = Time(0, 0)
-leaves_times_total = Time(0, 0)
+leave_times_total = Time(0, 0)
 
 
 def run_simulation(first_arrive, end_simulation_time):
@@ -15,19 +15,19 @@ def run_simulation(first_arrive, end_simulation_time):
     while time < end_simulation_time:
         if next_arrive_time <= next_leave_time:
             time = next_arrive_time
-            next_arrive_time = next_arrive_time + Time(0, 20)
             increment_current_users()
-            global arrive_times_total
-            arrive_times_total = arrive_times_total + time
+            sum_time_to_total_arrive_times(time)
             increment_total_arrives()
+
+            next_arrive_time = next_arrive_time + Time(0, 20)
             print("llegada: ", time)
             if current_users == 1:
                 next_leave_time = time + Time(0, 30)
         else:
             time = next_leave_time
+            sum_time_to_total_leave_times(time)
             decrement_current_users()
-            global leaves_times_total
-            leaves_times_total = leaves_times_total + time
+
             if current_users > 0:
                 next_leave_time = next_leave_time + Time(0, 30)
             else:
@@ -38,7 +38,17 @@ def run_simulation(first_arrive, end_simulation_time):
     print("The value of T is:", time)
     print(current_users)
     print(arrive_times_total)
-    print(leaves_times_total)
+    print(leave_times_total)
+
+
+def sum_time_to_total_leave_times(time):
+    global leave_times_total
+    leave_times_total = leave_times_total + time
+
+
+def sum_time_to_total_arrive_times(time):
+    global arrive_times_total
+    arrive_times_total = arrive_times_total + time
 
 
 def simulate(next_arrive_time, next_leave_time, time):

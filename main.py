@@ -26,17 +26,19 @@ def run_simulation(first_arrive, end_simulation_time):
         else:
             time = next_leave_time
             decrement_current_users()
+            global leaves_times_total
+            leaves_times_total = leaves_times_total + time
             if current_users > 0:
-                next_leave_time = next_leave_time + Time(0,30)
+                next_leave_time = next_leave_time + Time(0, 30)
             else:
                 next_leave_time = Time(sys.maxsize, 59)
             print("salida: ", time)
 
-
-    # Step 3: Output the value of T
+    # Output
     print("The value of T is:", time)
     print(current_users)
     print(arrive_times_total)
+    print(leaves_times_total)
 
 
 def simulate(next_arrive_time, next_leave_time, time):
@@ -71,4 +73,3 @@ def increment_total_arrives():
 if __name__ == '__main__':
     run_simulation(Time(8, 0), Time(12, 0))
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/

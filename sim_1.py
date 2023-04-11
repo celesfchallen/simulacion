@@ -9,6 +9,7 @@ output_time_total = Time(0, 0)
 idle_time_start = Time(0, 0)
 total_idle_time = Time(0, 0)
 time = Time(0, 0)
+simulation_start_time = Time(0, 0)
 
 next_input_time = Time(0, 0)
 next_output_time = high_value_time()
@@ -18,7 +19,9 @@ def run_simulation_1(first_input, end_simulation_time):
     global next_input_time
     global next_output_time
     global idle_time_start
+    global simulation_start_time
 
+    simulation_start_time = first_input
     next_input_time = first_input
     idle_time_start = first_input  # para que no me tome el primer user como idle time, dsp ver otra manera
 
@@ -34,7 +37,7 @@ def run_simulation_1(first_input, end_simulation_time):
     average_stay = calculate_average_stay()
     idle_time_percentage = calculate_idle_time_percentage()
 
-    print("The simulation started at: " + str(first_input) + " and ended at: " + str(end_simulation_time))
+    print("The simulation started at: " + str(simulation_start_time) + " and ended at: " + str(end_simulation_time))
     # not sure about that, check later
     print("The system was fully empty at:", time)
     print("Total of users: ", users_total)
@@ -44,8 +47,7 @@ def run_simulation_1(first_input, end_simulation_time):
 
 
 def calculate_idle_time_percentage():
-    return (total_idle_time.to_minutes() * 100 / time.to_minutes()).__trunc__()
-    # este calculo esta mal, no deberia usar el time si no la duracion de la simulacion
+    return (total_idle_time.to_minutes() * 100 / (time - simulation_start_time).to_minutes()).__trunc__()
 
 
 def calculate_average_stay():

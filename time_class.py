@@ -35,9 +35,5 @@ class Time:
     def divide_time_in_parts(self, parts):
         total_minutes = self.hour * 60 + self.minute
         minutes_per_part = total_minutes // parts
-        print(total_minutes)
-        print(minutes_per_part)
-        print(minutes_per_part/60)
         hours_per_part, minutes_left = divmod(minutes_per_part, 60)
-        print(hours_per_part)
         return Time(hours_per_part, minutes_left)

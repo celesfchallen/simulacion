@@ -1,4 +1,4 @@
-from time_class import Time
+from time_class import Time, build_from_minutes
 import sys
 
 current_users = 0
@@ -43,20 +43,31 @@ def run_simulation_2():
         sum_time_to_total_arrive_times()
         increment_total_arrives()
 
-        next_arrive_time = next_arrive_time + Time(0, 20)
+        get_next_arrive_time()
         print("llegada: ", time)
         if current_users == 1:
-            next_leave_time = time + Time(0, 30)
+            get_next_leave_time()
     else:
         time = next_leave_time
         sum_time_to_total_leave_times()
         decrement_current_users()
 
         if current_users > 0:
-            next_leave_time = next_leave_time + Time(0, 30)
+            get_next_leave_time()
         else:
             next_leave_time = Time(sys.maxsize, 59)
         print("salida: ", time)
+
+
+def get_next_arrive_time():
+    global next_arrive_time
+    next_arrive_time = next_arrive_time + build_from_minutes(20)
+
+
+def get_next_leave_time():
+    global next_leave_time
+    global time
+    next_leave_time = time + build_from_minutes(30)
 
 
 def sum_time_to_total_leave_times():

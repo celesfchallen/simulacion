@@ -9,7 +9,7 @@ leave_times_total = Time(0, 0)
 
 def run_simulation(first_arrive, end_simulation_time):
     next_arrive_time = first_arrive
-    next_leave_time = Time(sys.maxsize, 59)  # Set tps to a high value
+    next_leave_time = Time(sys.maxsize, 59)  # Set next_leave_time to a high value
     time = Time(0, 0)
 
     while time < end_simulation_time:
@@ -34,11 +34,14 @@ def run_simulation(first_arrive, end_simulation_time):
                 next_leave_time = Time(sys.maxsize, 59)
             print("salida: ", time)
 
+    average_stay = (leave_times_total - arrive_times_total).divide_time_in_parts(total_arrives)
+
     # Output
     print("The value of T is:", time)
     print(current_users)
     print(arrive_times_total)
     print(leave_times_total)
+    print("The average stay in the system is:", average_stay)
 
 
 def sum_time_to_total_leave_times(time):

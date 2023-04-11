@@ -1,4 +1,4 @@
-from sim_1 import run_simulation_1
+from simulations.sim_1 import run_simulation_1
 from time_class import Time
 
 if __name__ == '__main__':

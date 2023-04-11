@@ -1,5 +1,6 @@
 from time_class import Time, build_from_minutes
 import sys
+import random
 
 current_users = 0
 total_arrives = 0
@@ -28,8 +29,9 @@ def run_simulation(first_arrive, end_simulation_time):
     average_stay = (leave_times_total - arrive_times_total).divide_time_in_parts(total_arrives)
 
     # Output
-    print("The value of T is:", time)
-    print("Current users: ", current_users)
+    print("The simulation ended at:", end_simulation_time)  # not sure about that, check later
+    print("The system was fully empty at:", time)
+    print("Total of users: ", total_arrives)
     print("The average stay in the system is:", average_stay)
 
 
@@ -61,13 +63,15 @@ def run_simulation_2():
 
 def get_next_arrive_time():
     global next_arrive_time
-    next_arrive_time = next_arrive_time + build_from_minutes(20)
+    random_number = random.randint(10, 30)
+    next_arrive_time = next_arrive_time + build_from_minutes(random_number)
 
 
 def get_next_leave_time():
     global next_leave_time
     global time
-    next_leave_time = time + build_from_minutes(30)
+    random_number = random.randint(20, 40)
+    next_leave_time = time + build_from_minutes(random_number)
 
 
 def sum_time_to_total_leave_times():
@@ -99,4 +103,3 @@ def increment_total_arrives():
 
 if __name__ == '__main__':
     run_simulation(Time(8, 0), Time(12, 0))
-

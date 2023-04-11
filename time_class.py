@@ -38,6 +38,9 @@ class Time:
         hours_per_part, minutes_left = divmod(minutes_per_part, 60)
         return Time(hours_per_part, minutes_left)
 
+    def to_minutes(self):
+        return self.hour * 60 + self.minute
+
 
 def build_from_minutes(minutes):
     hours, minutes_left = divmod(minutes, 60)

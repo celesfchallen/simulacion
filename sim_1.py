@@ -17,13 +17,8 @@ next_output_time = high_value_time()
 
 def run_simulation_1(first_input, end_simulation_time):
     global next_input_time
-    global next_output_time
-    global idle_time_start
-    global simulation_start_time
 
-    simulation_start_time = first_input
-    next_input_time = first_input
-    idle_time_start = first_input  # para que no me tome el primer user como idle time, dsp ver otra manera
+    initialize_variables(first_input)
 
     while time < end_simulation_time:
         run_simulation()
@@ -46,6 +41,13 @@ def run_simulation_1(first_input, end_simulation_time):
     print("The percentage of idle time is: %" + str(idle_time_percentage))
 
 
+def initialize_variables(first_input):
+    global simulation_start_time, next_input_time, idle_time_start
+    simulation_start_time = first_input
+    next_input_time = first_input
+    idle_time_start = first_input  # para que no me tome el primer user como idle time, dsp ver otra manera
+
+
 def calculate_idle_time_percentage():
     return (total_idle_time.to_minutes() * 100 / (time - simulation_start_time).to_minutes()).__trunc__()
 
@@ -55,8 +57,7 @@ def calculate_average_stay():
 
 
 def run_simulation():
-    global time
-    global next_output_time
+    global time, next_output_time
     if next_input_time <= next_output_time:
         time = next_input_time
         increment_current_users()

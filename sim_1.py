@@ -1,5 +1,5 @@
 from time_class import Time, build_from_minutes
-import sys
+from utils import high_value_time
 import random
 
 current_users = 0
@@ -9,7 +9,7 @@ leave_times_total = Time(0, 0)
 time = Time(0, 0)
 
 next_arrive_time = Time(0, 0)
-next_leave_time = Time(sys.maxsize, 59)  # Set next_leave_time to a high value
+next_leave_time = high_value_time()
 
 
 def run_simulation(first_arrive, end_simulation_time):
@@ -21,7 +21,7 @@ def run_simulation(first_arrive, end_simulation_time):
         run_simulation_2()
 
     if current_users != 0:
-        next_arrive_time = Time(sys.maxsize, 59)
+        next_arrive_time = high_value_time()
 
     while current_users != 0:
         run_simulation_2()
@@ -57,7 +57,7 @@ def run_simulation_2():
         if current_users > 0:
             get_next_leave_time()
         else:
-            next_leave_time = Time(sys.maxsize, 59)
+            next_leave_time = high_value_time()
         print("salida: ", time)
 
 

@@ -7,7 +7,7 @@ Simulación - UTN FRBA 2023
 En la clase main.py importas el método run_simulation_x de la simulación que quieras correr. 
 
 ``
-from sim_1 import run_simulation_1
+from simulations.sim_1 import run_simulation_1
 ``
 
 Dentro del método main la llamas con los parámetros correspondientes a cada una.

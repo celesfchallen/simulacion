@@ -94,7 +94,7 @@ def end_idle_time():
 
 def get_next_input_time():
     global next_input_time
-    random_number = random.randint(25, 30)
+    random_number = random.randint(15, 25)
     next_input_time = next_input_time + build_from_minutes(random_number)
 
 

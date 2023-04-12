@@ -25,9 +25,44 @@ run_simulation_1(first_input, end_simulation_time)
 
 ### Descripción
 Simulamos un sistema en el que ingresan y egresan usuarios.
-Nuestro dato encadenador de eventos es la llegada de usuarios en un rango de tiempo 
-
+Nuestro dato encadenador de eventos es la llegada de usuarios en un rango de tiempo
 
 La idea de esta simulación es estimar los valores de promedio de permanencia en el sistema ``average_stay`` y el porcentaje de tiempo ocioso ``idle_time_percentage``
 
-La llegada de usuarios al sistema y el tiempo que se tarda en despachar a un usuario son equiprobables dentro de un rango dado
+#### Variables Exógenas
+###### Datos
+- **Intervalo entre llegadas**: Equiprobables en un rango dado en minutos. ej:(10, 30)
+- **Tiempo de atención**: Equiprobables en un rango dado en minutos.
+
+###### Variable de Control
+En esta simulación no hay variables de control 
+ 
+#### Variables Endógenas
+###### Estado
+- **Cantidad de personas en la fila** ``current_users``  
+
+
+###### Resultado
+- **Promedio de permanencia en el sistema** ``average_stay`` 
+
+    Se calcula como (STS - STLL) / CLL 
+    
+    Siendo: 
+
+    STS = Sumatoria de tiempos de salida
+
+    STLL = Sumatoria de tiempos de llegada
+
+    CLL = Cantidad de llegadas
+
+
+- **Porcentaje de tiempo ocioso** ``idle_time_percentage``
+
+    Se calcula como STO * 100 / T 
+    
+    Siendo: 
+
+    STO = Sumatoria de tiempo oscioso
+
+    T = Tiempo 
+

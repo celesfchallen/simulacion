@@ -73,4 +73,4 @@ En esta simulación no hay variables de control
 - PTO = Porcentaje de tiempo oscioso
 - PPS = Promedio de permanencia en el sistema
 
-[nombres de cada variable]: https://github.com/celesfchallen/simulacion#variables-end%C3%B3genas
+[nombres de cada variable]: https://github.com/celesfchallen/simulacion#definici%C3%B3n-de-variables

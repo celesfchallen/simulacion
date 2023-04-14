@@ -14,11 +14,21 @@ simulation_start_time = Time(0, 0)
 next_input_time = Time(0, 0)
 next_output_time = high_value_time()
 
+first_value_input_range = 0
+second_value_input_range = 10
 
-def run_simulation_1(first_input, end_simulation_time):
-    global next_input_time
+first_value_output_range = 0
+second_value_output_range = 10
+
+
+def run_simulation_1(first_input, end_simulation_time, input_range_1, input_range_2, output_range_1, output_range_2):
+    global next_input_time, first_value_input_range, second_value_input_range, first_value_output_range, second_value_output_range
 
     initialize_variables(first_input)
+    first_value_input_range = input_range_1
+    second_value_input_range = input_range_2
+    first_value_output_range = output_range_1
+    second_value_output_range = output_range_2
 
     while time < end_simulation_time:
         run_simulation()
@@ -94,13 +104,13 @@ def end_idle_time():
 
 def get_next_input_time():
     global next_input_time
-    random_number = random.randint(15, 25)
+    random_number = random.randint(first_value_input_range, second_value_input_range)
     next_input_time = next_input_time + build_from_minutes(random_number)
 
 
 def get_next_output_time():
     global next_output_time
-    random_number = random.randint(10, 20)
+    random_number = random.randint(first_value_output_range, second_value_output_range)
     next_output_time = time + build_from_minutes(random_number)
 
 

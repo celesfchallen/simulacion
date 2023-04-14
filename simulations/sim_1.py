@@ -14,21 +14,18 @@ simulation_start_time = Time(0, 0)
 TPLL = Time(0, 0)
 TPS = high_value_time()
 
-first_value_input_range = 0
-second_value_input_range = 10
-
 first_value_output_range = 0
 second_value_output_range = 10
 
+IA = (0, 0)
+TA = (0, 0)
 
-def run_simulation_1(first_input, end_simulation_time, input_range_1, input_range_2, output_range_1, output_range_2):
-    global TPLL, first_value_input_range, second_value_input_range, first_value_output_range, second_value_output_range
+def run_simulation_1(first_input, end_simulation_time, ia, ta):
+    global TPLL, TA, IA
 
+    IA = ia
+    TA = ta
     initialize_variables(first_input)
-    first_value_input_range = input_range_1
-    second_value_input_range = input_range_2
-    first_value_output_range = output_range_1
-    second_value_output_range = output_range_2
 
     while T < end_simulation_time:
         run_simulation()
@@ -104,13 +101,13 @@ def end_idle_time():
 
 def get_next_input_time():
     global TPLL
-    random_number = random.randint(first_value_input_range, second_value_input_range)
+    random_number = random.randint(IA[0], IA[1])
     TPLL = TPLL + build_from_minutes(random_number)
 
 
 def get_next_output_time():
     global TPS
-    random_number = random.randint(first_value_output_range, second_value_output_range)
+    random_number = random.randint(TA[0], TA[1])
     TPS = T + build_from_minutes(random_number)
 
 

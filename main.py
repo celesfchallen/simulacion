@@ -2,4 +2,4 @@ from simulations.sim_1 import run_simulation_1
 from time_class import Time
 
 if __name__ == '__main__':
-    run_simulation_1(Time(8, 0), Time(12, 0), 10, 30, 5, 30)
+    run_simulation_1(Time(8, 0), Time(12, 0), (10, 30), (5, 30))

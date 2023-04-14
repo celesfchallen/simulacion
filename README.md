@@ -11,10 +11,10 @@ Tener en cuenta que solo se puede correr **una simulación a la vez**.
 from simulations.sim_1 import run_simulation_1
 ``
 
-Dentro del método main la llamas con los parámetros correspondientes a cada una.
+Dentro del método main se hace el llamado con los parámetros correspondientes a cada una.
 
 A continuación está detallada cada simulación y qué parámetros necesita.
-Al final del archivo se detalla que representan los [nombres de cada variable]
+Al final del archivo se detalla que representan los nombres de cada variable en la sección: [Definición de variables].
 
 ## Simulación 1
 ### Parámetros
@@ -31,26 +31,27 @@ Nuestro dato encadenador de eventos es la llegada de usuarios en un rango de tie
 
 La idea de esta simulación es estimar los valores de promedio de permanencia en el sistema ``average_stay`` y el porcentaje de tiempo ocioso ``idle_time_percentage``
 
-#### Metodología
-**Evento a evento.**
+###### Metodología
+Evento a evento.
 Datos encadenadores de eventos: IA y TA.
 
-#### Variables Exógenas
-###### Datos
+###### Variables Exógenas
+Datos
 - **Intervalo entre llegadas**: Equiprobables en un rango dado en minutos. ej:(10, 30)
 - **Tiempo de atención**: Equiprobables en un rango dado en minutos.
 
-###### Variable de Control
-En esta simulación no hay variables de control 
+Variable de Control
+
+- En esta simulación no hay variables de control. 
  
-#### Variables Endógenas
-###### Estado
+###### Variables Endógenas
+Estado
 - **Cantidad de personas en la fila** ``current_users``  
 
 
-###### Resultado
+Resultado
 - **Promedio de permanencia en el sistema** ``average_stay`` 
-
+  
     Se calcula como (STS - STLL) / CLL
 
 
@@ -65,6 +66,8 @@ En esta simulación no hay variables de control
 - IA = Intervalo entre arribos
 - NS = Cantidad de personas en la cola
 - CLL = Cantidad de llegadas
+- TPLL = Tiempo de próxima llegada
+- TPS = Tiempo de próxima salida
 - STS = Sumatoria de tiempos de salida
 - STLL = Sumatoria de tiempos de llegada
 - ITO = Intervalo de tiempo oscioso
@@ -73,4 +76,4 @@ En esta simulación no hay variables de control
 - PTO = Porcentaje de tiempo oscioso
 - PPS = Promedio de permanencia en el sistema
 
-[nombres de cada variable]: https://github.com/celesfchallen/simulacion#definici%C3%B3n-de-variables
+[Definición de variables]: https://github.com/celesfchallen/simulacion#definici%C3%B3n-de-variables

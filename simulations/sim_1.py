@@ -2,17 +2,17 @@ from time_class import Time, build_from_minutes
 from utils import high_value_time
 import random
 
-current_users = 0
-users_total = 0
-input_time_total = Time(0, 0)
-output_time_total = Time(0, 0)
+NS = 0
+CLL = 0
+STLL = Time(0, 0)
+STS = Time(0, 0)
 idle_time_start = Time(0, 0)
 total_idle_time = Time(0, 0)
-time = Time(0, 0)
+T = Time(0, 0)
 simulation_start_time = Time(0, 0)
 
-next_input_time = Time(0, 0)
-next_output_time = high_value_time()
+TPLL = Time(0, 0)
+TPS = high_value_time()
 
 first_value_input_range = 0
 second_value_input_range = 10
@@ -22,7 +22,7 @@ second_value_output_range = 10
 
 
 def run_simulation_1(first_input, end_simulation_time, input_range_1, input_range_2, output_range_1, output_range_2):
-    global next_input_time, first_value_input_range, second_value_input_range, first_value_output_range, second_value_output_range
+    global TPLL, first_value_input_range, second_value_input_range, first_value_output_range, second_value_output_range
 
     initialize_variables(first_input)
     first_value_input_range = input_range_1
@@ -30,13 +30,13 @@ def run_simulation_1(first_input, end_simulation_time, input_range_1, input_rang
     first_value_output_range = output_range_1
     second_value_output_range = output_range_2
 
-    while time < end_simulation_time:
+    while T < end_simulation_time:
         run_simulation()
 
-    if current_users != 0:
-        next_input_time = high_value_time()
+    if NS != 0:
+        TPLL = high_value_time()
 
-    while current_users != 0:
+    while NS != 0:
         run_simulation()
 
     average_stay = calculate_average_stay()
@@ -44,96 +44,96 @@ def run_simulation_1(first_input, end_simulation_time, input_range_1, input_rang
 
     print("The simulation started at: " + str(simulation_start_time) + " and ended at: " + str(end_simulation_time))
     # not sure about that, check later
-    print("The system was fully empty at:", time)
-    print("Total of users: ", users_total)
+    print("The system was fully empty at:", T)
+    print("Total of users: ", CLL)
     print("The average stay in the system is:", average_stay)
     print("Total idle time:", total_idle_time)
     print("The percentage of idle time is: %" + str(idle_time_percentage))
 
 
 def initialize_variables(first_input):
-    global simulation_start_time, next_input_time, idle_time_start
+    global simulation_start_time, TPLL, idle_time_start
     simulation_start_time = first_input
-    next_input_time = first_input
+    TPLL = first_input
     idle_time_start = first_input  # para que no me tome el primer user como idle time, dsp ver otra manera
 
 
 def calculate_idle_time_percentage():
-    return (total_idle_time.to_minutes() * 100 / (time - simulation_start_time).to_minutes()).__trunc__()
+    return (total_idle_time.to_minutes() * 100 / (T - simulation_start_time).to_minutes()).__trunc__()
 
 
 def calculate_average_stay():
-    return (output_time_total - input_time_total).divide_time_in_parts(users_total)
+    return (STS - STLL).divide_time_in_parts(CLL)
 
 
 def run_simulation():
-    global time, next_output_time
-    if next_input_time <= next_output_time:
-        time = next_input_time
+    global T, TPS
+    if TPLL <= TPS:
+        T = TPLL
         increment_current_users()
         sum_time_to_total_input_time()
         increment_users_total()
 
         get_next_input_time()
-        print("Input: ", time)
-        if current_users == 1:
+        print("Input: ", T)
+        if NS == 1:
             get_next_output_time()
             end_idle_time()
     else:
-        time = next_output_time
+        T = TPS
         sum_time_to_total_output_time()
         decrement_current_users()
 
-        if current_users > 0:
+        if NS > 0:
             get_next_output_time()
         else:
             start_idle_time()
-            next_output_time = high_value_time()
-        print("Output: ", time)
+            TPS = high_value_time()
+        print("Output: ", T)
 
 
 def start_idle_time():
     global idle_time_start
-    idle_time_start = time
+    idle_time_start = T
 
 
 def end_idle_time():
     global total_idle_time
-    total_idle_time = total_idle_time + (time - idle_time_start)
+    total_idle_time = total_idle_time + (T - idle_time_start)
 
 
 def get_next_input_time():
-    global next_input_time
+    global TPLL
     random_number = random.randint(first_value_input_range, second_value_input_range)
-    next_input_time = next_input_time + build_from_minutes(random_number)
+    TPLL = TPLL + build_from_minutes(random_number)
 
 
 def get_next_output_time():
-    global next_output_time
+    global TPS
     random_number = random.randint(first_value_output_range, second_value_output_range)
-    next_output_time = time + build_from_minutes(random_number)
+    TPS = T + build_from_minutes(random_number)
 
 
 def sum_time_to_total_output_time():
-    global output_time_total
-    output_time_total = output_time_total + time
+    global STS
+    STS = STS + T
 
 
 def sum_time_to_total_input_time():
-    global input_time_total
-    input_time_total = input_time_total + time
+    global STLL
+    STLL = STLL + T
 
 
 def decrement_current_users():
-    global current_users
-    current_users -= 1
+    global NS
+    NS -= 1
 
 
 def increment_current_users():
-    global current_users
-    current_users += 1
+    global NS
+    NS += 1
 
 
 def increment_users_total():
-    global users_total
-    users_total += 1
+    global CLL
+    CLL += 1

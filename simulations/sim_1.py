@@ -36,16 +36,16 @@ def run_simulation_1(first_input, end_simulation_time, ia, ta):
     while NS != 0:
         run_simulation()
 
-    average_stay = calculate_average_stay()
-    idle_time_percentage = calculate_idle_time_percentage()
+    PPS = calculate_PPS()
+    PTO = calculate_PTO()
 
     print("The simulation started at: " + str(simulation_start_time) + " and ended at: " + str(end_simulation_time))
     # not sure about that, check later
     print("The system was fully empty at:", T)
     print("Total of users: ", CLL)
-    print("The average stay in the system is:", average_stay)
+    print("The average stay in the system is:", PPS)
     print("Total idle time:", total_idle_time)
-    print("The percentage of idle time is: %" + str(idle_time_percentage))
+    print("The percentage of idle time is: %" + str(PTO))
 
 
 def initialize_variables(first_input):
@@ -55,11 +55,11 @@ def initialize_variables(first_input):
     idle_time_start = first_input  # para que no me tome el primer user como idle time, dsp ver otra manera
 
 
-def calculate_idle_time_percentage():
+def calculate_PTO():
     return (total_idle_time.to_minutes() * 100 / (T - simulation_start_time).to_minutes()).__trunc__()
 
 
-def calculate_average_stay():
+def calculate_PPS():
     return (STS - STLL).divide_time_in_parts(CLL)
 
 
@@ -67,22 +67,22 @@ def run_simulation():
     global T, TPS
     if TPLL <= TPS:
         T = TPLL
-        increment_current_users()
-        sum_time_to_total_input_time()
-        increment_users_total()
+        increment_NS()
+        sum_time_to_STLL()
+        increment_CLL()
 
-        get_next_input_time()
+        calculate_TPLL()
         print("Input: ", T)
         if NS == 1:
-            get_next_output_time()
+            calculate_TPS()
             end_idle_time()
     else:
         T = TPS
-        sum_time_to_total_output_time()
-        decrement_current_users()
+        sum_time_to_STS()
+        decrement_NS()
 
         if NS > 0:
-            get_next_output_time()
+            calculate_TPS()
         else:
             start_idle_time()
             TPS = high_value_time()
@@ -99,38 +99,38 @@ def end_idle_time():
     total_idle_time = total_idle_time + (T - idle_time_start)
 
 
-def get_next_input_time():
+def calculate_TPLL():
     global TPLL
     random_number = random.randint(IA[0], IA[1])
     TPLL = TPLL + build_from_minutes(random_number)
 
 
-def get_next_output_time():
+def calculate_TPS():
     global TPS
     random_number = random.randint(TA[0], TA[1])
     TPS = T + build_from_minutes(random_number)
 
 
-def sum_time_to_total_output_time():
+def sum_time_to_STS():
     global STS
     STS = STS + T
 
 
-def sum_time_to_total_input_time():
+def sum_time_to_STLL():
     global STLL
     STLL = STLL + T
 
 
-def decrement_current_users():
+def decrement_NS():
     global NS
     NS -= 1
 
 
-def increment_current_users():
+def increment_NS():
     global NS
     NS += 1
 
 
-def increment_users_total():
+def increment_CLL():
     global CLL
     CLL += 1

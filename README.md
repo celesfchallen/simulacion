@@ -37,8 +37,14 @@ Datos encadenadores de eventos: IA y TA.
 
 ###### Variables Exógenas
 Datos
-- **Intervalo entre llegadas**: Equiprobables en un rango dado en minutos. ej:(10, 30)
-- **Tiempo de atención**: Equiprobables en un rango dado en minutos.
+- **Intervalo entre llegadas** `IA`
+
+  Equiprobables en un rango dado en minutos. ej:(10, 30)
+
+
+- **Tiempo de atención** `TA` 
+
+  Equiprobables en un rango dado en minutos.
 
 Variable de Control
 
@@ -46,19 +52,28 @@ Variable de Control
  
 ###### Variables Endógenas
 Estado
-- **Cantidad de personas en la fila** ``current_users``  
+- **Cantidad de personas en la fila** `NS`
 
 
 Resultado
-- **Promedio de permanencia en el sistema** ``average_stay`` 
+- **Promedio de permanencia en el sistema** `PPS`
   
     Se calcula como (STS - STLL) / CLL
 
 
-- **Porcentaje de tiempo ocioso** ``idle_time_percentage``
+- **Porcentaje de tiempo ocioso** `PTO`
 
     Se calcula como STO * 100 / T 
 
+## Simulación 2
+``Ejercicio 1 de la guía``
+
+La misma que la anterior pero con arrepentimiento.
+
+## Simulación 3
+``Ejercicio 2 de la guía``
+
+La misma que la anterior pero con dos puestos de atención.
 
 ## Definición de Variables
 

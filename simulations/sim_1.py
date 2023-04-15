@@ -20,6 +20,7 @@ second_value_output_range = 10
 IA = (0, 0)
 TA = (0, 0)
 
+
 def run_simulation_1(first_input, end_simulation_time, ia, ta):
     global TPLL, TA, IA
 

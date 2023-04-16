@@ -14,9 +14,6 @@ simulation_start_time = Time(0, 0)
 TPLL = Time(0, 0)
 TPS = high_value_time()
 
-first_value_output_range = 0
-second_value_output_range = 10
-
 IA = (0, 0)
 TA = (0, 0)
 

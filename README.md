@@ -19,17 +19,19 @@ Al final del archivo se detalla que representan los nombres de cada variable en 
 ## Simulación 1
 ### Parámetros
 ``
-run_simulation_1(first_input, end_simulation_time)
+run_simulation_1(first_input, end_simulation_time, ia, ta)
 ``
 
 - **first_input**: Horario en el que fue el primer input en el sistema, es del tipo **Time**, ej: Time(8, 30) representa 8hs 30min
 - **end_simulation_time**: Horario en el que termina la simulación, también del tipo **Time**.
+- **ia**: Intervalo entre arribos, de tipo par (x,y)
+- **ta**: Tiempo de atención, de tipo par (x,y)
 
 ### Descripción
 Simulamos un sistema en el que ingresan y egresan usuarios.
-Nuestro dato encadenador de eventos es la llegada de usuarios en un rango de tiempo
+Nuestro dato encadenador de eventos es la llegada de usuarios en un rango de tiempo.
 
-La idea de esta simulación es estimar los valores de promedio de permanencia en el sistema ``average_stay`` y el porcentaje de tiempo ocioso ``idle_time_percentage``
+El sistema es **con vaciamiento**.
 
 ###### Metodología
 Evento a evento.

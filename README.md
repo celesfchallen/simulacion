@@ -17,15 +17,6 @@ A continuación está detallada cada simulación y qué parámetros necesita.
 Al final del archivo se detalla que representan los nombres de cada variable en la sección: [Definición de variables].
 
 ## Simulación 1
-### Parámetros
-``
-run_simulation_1(first_input, end_simulation_time, ia, ta)
-``
-
-- **first_input**: Horario en el que fue el primer input en el sistema, es del tipo **Time**, ej: Time(8, 30) representa 8hs 30min
-- **end_simulation_time**: Horario en el que termina la simulación, también del tipo **Time**.
-- **ia**: Intervalo entre arribos, de tipo par (x,y)
-- **ta**: Tiempo de atención, de tipo par (x,y)
 
 ### Descripción
 ``Ejercicio 1 de la guía``
@@ -43,6 +34,15 @@ se retiran todos.
 
 El sistema es **con vaciamiento y arrepentimiento**.
 
+### Parámetros
+``
+run_simulation_1(first_input, end_simulation_time, ia, ta)
+``
+
+- **first_input**: Horario en el que fue el primer input en el sistema, es del tipo **Time**, ej: Time(8, 30) representa 8hs 30min
+- **end_simulation_time**: Horario en el que termina la simulación, también del tipo **Time**.
+
+### Análisis
 ###### Metodología
 Evento a evento.
 Datos encadenadores de eventos: IA y TA.
@@ -77,7 +77,7 @@ Resultado
 
     Se calcula como STO * 100 / T
 
-## Simulación 3
+## Simulación 2
 ``Ejercicio 2 de la guía``
 
 La misma que la anterior pero con dos puestos de atención.

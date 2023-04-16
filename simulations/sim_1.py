@@ -18,10 +18,10 @@ IA = (0, 0)
 TA = (0, 0)
 
 
-def run_simulation_1(first_input, end_simulation_time, ia, ta):
+def run_simulation_1(first_input, end_simulation_time):
     global TPLL
 
-    initialize_variables(first_input, ia, ta)
+    initialize_variables(first_input)
 
     while T < end_simulation_time:
         run_simulation()
@@ -44,13 +44,13 @@ def run_simulation_1(first_input, end_simulation_time, ia, ta):
     print("The percentage of idle time is: %" + str(PTO))
 
 
-def initialize_variables(first_input, ia, ta):
+def initialize_variables(first_input):
     global simulation_start_time, TPLL, ITO, TA, IA
     simulation_start_time = first_input
     TPLL = first_input
     ITO = first_input  # para que no me tome el primer user como idle time, dsp ver otra manera
-    IA = ia
-    TA = ta
+    IA = (0, 10)
+    TA = (10, 20)
 
 
 def calculate_PTO():

@@ -9,7 +9,6 @@ STS = Time(0, 0)
 ITO = Time(0, 0)
 STO = Time(0, 0)
 T = Time(0, 0)
-simulation_start_time = Time(0, 0)
 
 TPLL = Time(0, 0)
 TPS = high_value_time()
@@ -18,10 +17,10 @@ IA = (0, 0)
 TA = (0, 0)
 
 
-def run_simulation_1(first_input, end_simulation_time):
+def run_simulation_1(end_simulation_time):
     global TPLL
 
-    initialize_variables(first_input)
+    initialize_variables()
 
     while T < end_simulation_time:
         run_simulation()
@@ -35,26 +34,21 @@ def run_simulation_1(first_input, end_simulation_time):
     PPS = calculate_PPS()
     PTO = calculate_PTO()
 
-    print("The simulation started at: " + str(simulation_start_time) + " and ended at: " + str(end_simulation_time))
-    # not sure about that, check later
-    print("The system was fully empty at:", T)
+    print("The system was fully empty after:", T)
     print("Total of users: ", CLL)
     print("The average stay in the system is:", PPS)
     print("Total idle time:", STO)
     print("The percentage of idle time is: %" + str(PTO))
 
 
-def initialize_variables(first_input):
-    global simulation_start_time, TPLL, ITO, TA, IA
-    simulation_start_time = first_input
-    TPLL = first_input
-    ITO = first_input  # para que no me tome el primer user como idle time, dsp ver otra manera
+def initialize_variables():
+    global TA, IA
     IA = (0, 10)
     TA = (10, 20)
 
 
 def calculate_PTO():
-    return (STO.to_minutes() * 100 / (T - simulation_start_time).to_minutes()).__trunc__()
+    return (STO.to_minutes() * 100 / T.to_minutes()).__trunc__()
 
 
 def calculate_PPS():
@@ -65,11 +59,12 @@ def run_simulation():
     global T, TPS
     if TPLL <= TPS:
         T = TPLL
-        increment_NS()
+        calculate_TPLL()
+
         sum_time_to_STLL()
+        increment_NS()
         increment_CLL()
 
-        calculate_TPLL()
         print("Input: ", T)
         if NS == 1:
             calculate_TPS()

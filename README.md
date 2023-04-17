@@ -97,5 +97,6 @@ La misma que la anterior pero con dos puestos de atención.
 - T = Tiempo
 - PTO = Porcentaje de tiempo oscioso
 - PPS = Promedio de permanencia en el sistema
+- PARR = Porcentaje de arrepentimiento
 
 [Definición de variables]: https://github.com/celesfchallen/simulacion#definici%C3%B3n-de-variables

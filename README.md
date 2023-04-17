@@ -36,11 +36,10 @@ El sistema es **con vaciamiento y arrepentimiento**.
 
 ### Parámetros
 ``
-run_simulation_1(first_input, end_simulation_time, ia, ta)
+run_simulation_1(simulation_duration)
 ``
 
-- **first_input**: Horario en el que fue el primer input en el sistema, es del tipo **Time**, ej: Time(8, 30) representa 8hs 30min
-- **end_simulation_time**: Horario en el que termina la simulación, también del tipo **Time**.
+- **simulation_duration**: Tiempo que dura la simulación, es del tipo **Time**, ej: Time(8, 30) representa 8hs 30min
 
 ### Análisis
 ###### Metodología

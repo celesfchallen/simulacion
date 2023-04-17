@@ -17,12 +17,12 @@ IA = (0, 0)
 TA = (0, 0)
 
 
-def run_simulation_1(end_simulation_time):
+def run_simulation_1(simulation_duration):
     global TPLL
 
     initialize_variables()
 
-    while T < end_simulation_time:
+    while T < simulation_duration:
         run_simulation()
 
     if NS != 0:

@@ -42,3 +42,4 @@ Al final del archivo se detalla que representan los nombres de cada variable en 
 - PARR = Porcentaje de arrepentimiento
 
 [Definición de variables]: https://github.com/celesfchallen/simulacion#definici%C3%B3n-de-variables
+[Simulación 1]: https://github.com/celesfchallen/simulacion/blob/main/SIM_1.md

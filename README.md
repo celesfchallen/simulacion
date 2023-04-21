@@ -40,6 +40,10 @@ Al final del archivo se detalla que representan los nombres de cada variable en 
 - PTO = Porcentaje de tiempo oscioso
 - PPS = Promedio de permanencia en el sistema
 - PARR = Porcentaje de arrepentimiento
+- PE = Promedio de espera
+- CQ = Cantidad de personas que no se arrepintieron
+- CARR = Cantidad de personas que se arrepintieron
+- STA = ?
 
 [Definición de variables]: https://github.com/celesfchallen/simulacion#definici%C3%B3n-de-variables
 [Simulación 1]: https://github.com/celesfchallen/simulacion/blob/main/SIM_1.md

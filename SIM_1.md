@@ -57,3 +57,7 @@ Resultado
 - **Porcentaje de tiempo ocioso** `PTO`
 
     Se calcula como STO * 100 / T
+
+- **Porcentaje de personas que se arrepintieron al encontrar 5 personas con respecto al total de las arrepentidas** `PARR5`
+
+    Se calcula como CARR5 * 100 / CARR

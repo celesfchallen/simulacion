@@ -2,49 +2,106 @@ from time_class import Time, build_from_minutes
 from utils import high_value_time
 import random
 
-NS = 0
-CLL = 0
-STLL = Time(0, 0)
-STS = Time(0, 0)
-ITO = Time(0, 0)
-STO = Time(0, 0)
-T = Time(0, 0)
+NS: int
 
-TPLL = Time(0, 0)
-TPS = high_value_time()
+IA: tuple[int, int]
+TA: tuple[int, int]
 
-IA = (0, 0)
-TA = (0, 0)
+PPS: Time
+PTO: int
+
+STLL: Time
+STS: Time
+CLL: int
+ITO: Time
+STO: Time
+T: Time
+TPLL: Time
+TPS: Time
 
 
 def run_simulation_1(simulation_duration):
     global TPLL
 
-    initialize_variables()
+    set_initial_conditions()
 
     while T < simulation_duration:
         run_simulation()
 
     if NS != 0:
-        TPLL = high_value_time()
+        empty_system()
 
+    calculate_results()
+    show_results()
+
+
+def set_initial_conditions():
+    global NS, CLL, STLL, STS, ITO, STO, T, TPLL, TPS, TA, IA
+    NS = 0
+    CLL = 0
+    STLL = Time(0, 0)
+    STS = Time(0, 0)
+    ITO = Time(0, 0)
+    STO = Time(0, 0)
+    T = Time(0, 0)
+    TPLL = Time(0, 0)
+    TPS = high_value_time()
+    IA = (0, 10)
+    TA = (10, 20)
+
+
+def run_simulation():
+    if TPLL <= TPS:
+        arrive_routine()
+    else:
+        leave_routine()
+
+
+def arrive_routine():
+    global T
+    T = TPLL
+    calculate_TPLL()
+    sum_time_to_STLL()
+    increment_NS()
+    increment_CLL()
+    print("Input: ", T)
+    if NS == 1:
+        calculate_TPS()
+        end_ITO()
+
+
+def leave_routine():
+    global T, TPS
+    T = TPS
+    sum_time_to_STS()
+    decrement_NS()
+    if NS > 0:
+        calculate_TPS()
+    else:
+        start_ITO()
+        TPS = high_value_time()
+    print("Output: ", T)
+
+
+def empty_system():
+    global TPLL
+    TPLL = high_value_time()
     while NS != 0:
         run_simulation()
 
+
+def calculate_results():
+    global PPS, PTO
     PPS = calculate_PPS()
     PTO = calculate_PTO()
 
+
+def show_results():
     print("The system was fully empty after:", T)
     print("Total of users: ", CLL)
     print("The average stay in the system is:", PPS)
     print("Total idle time:", STO)
     print("The percentage of idle time is: %" + str(PTO))
-
-
-def initialize_variables():
-    global TA, IA
-    IA = (0, 10)
-    TA = (10, 20)
 
 
 def calculate_PTO():
@@ -53,33 +110,6 @@ def calculate_PTO():
 
 def calculate_PPS():
     return (STS - STLL).divide_time_in_parts(CLL)
-
-
-def run_simulation():
-    global T, TPS
-    if TPLL <= TPS:
-        T = TPLL
-        calculate_TPLL()
-
-        sum_time_to_STLL()
-        increment_NS()
-        increment_CLL()
-
-        print("Input: ", T)
-        if NS == 1:
-            calculate_TPS()
-            end_ITO()
-    else:
-        T = TPS
-        sum_time_to_STS()
-        decrement_NS()
-
-        if NS > 0:
-            calculate_TPS()
-        else:
-            start_ITO()
-            TPS = high_value_time()
-        print("Output: ", T)
 
 
 def start_ITO():

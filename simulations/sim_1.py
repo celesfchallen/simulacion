@@ -61,13 +61,29 @@ def arrive_routine():
     global T
     T = TPLL
     calculate_TPLL()
-    sum_time_to_STLL()
-    increment_NS()
-    increment_CLL()
-    print("Input: ", T)
-    if NS == 1:
-        calculate_TPS()
-        end_ITO()
+    regrets = regret_routine()
+    if not regrets:
+        increment_NS()
+        increment_CLL()
+        sum_time_to_STLL()
+        print("Input: ", T)
+        if NS == 1:
+            calculate_TPS()
+            end_ITO()
+
+
+def regret_routine():
+    if NS > 8:
+        return True
+
+    if NS <= 4:
+        return False
+
+    r = random.random()
+    if r <= 0.4:
+        return False
+    else:
+        return True
 
 
 def leave_routine():

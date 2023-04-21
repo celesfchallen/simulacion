@@ -32,12 +32,12 @@ Datos encadenadores de eventos: IA y TA.
 Datos
 - **Intervalo entre llegadas** `IA`
 
-  Equiprobables en un rango dado en minutos. ej:(10, 30)
+    fdp equiprobable (10, 30)
 
 
 - **Tiempo de atención** `TA` 
 
-  Equiprobables en un rango dado en minutos.
+  fdp lineal f(20)=2*f(10)
 
 Variable de Control
 

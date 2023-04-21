@@ -9,6 +9,7 @@ TA: tuple[int, int]
 
 PPS: Time
 PTO: int
+PARR5: int
 
 STLL: Time
 STS: Time
@@ -18,6 +19,8 @@ STO: Time
 T: Time
 TPLL: Time
 TPS: Time
+CARR: int
+CARR5: int
 
 
 def run_simulation_1(simulation_duration):
@@ -36,7 +39,7 @@ def run_simulation_1(simulation_duration):
 
 
 def set_initial_conditions():
-    global NS, CLL, STLL, STS, ITO, STO, T, TPLL, TPS, TA, IA
+    global NS, CLL, STLL, STS, ITO, STO, T, TPLL, TPS, TA, IA, PARR5, CARR, CARR5
     NS = 0
     CLL = 0
     STLL = Time(0, 0)
@@ -48,6 +51,9 @@ def set_initial_conditions():
     TPS = high_value_time()
     IA = (0, 10)
     TA = (10, 20)
+    PARR5 = 0
+    CARR5 = 0
+    CARR = 0
 
 
 def run_simulation():
@@ -74,6 +80,7 @@ def arrive_routine():
 
 def regret_routine():
     if NS > 8:
+        increment_CARR()
         return True
 
     if NS <= 4:
@@ -83,6 +90,9 @@ def regret_routine():
     if r <= 0.4:
         return False
     else:
+        if NS == 5:
+            increment_CARR5()
+        increment_CARR()
         return True
 
 
@@ -107,9 +117,10 @@ def empty_system():
 
 
 def calculate_results():
-    global PPS, PTO
+    global PPS, PTO, PARR5
     PPS = calculate_PPS()
     PTO = calculate_PTO()
+    PARR5 = calculate_PARR5()
 
 
 def show_results():
@@ -118,6 +129,7 @@ def show_results():
     print("The average stay in the system is:", PPS)
     print("Total idle time:", STO)
     print("The percentage of idle time is: %" + str(PTO))
+    print("The percentage of regret when there 5 people in line is: %" + str(PARR5))
 
 
 def calculate_PTO():
@@ -126,6 +138,12 @@ def calculate_PTO():
 
 def calculate_PPS():
     return (STS - STLL).divide_time_in_parts(CLL)
+
+
+def calculate_PARR5():
+    if CARR == 0:
+        return 0
+    return (CARR5 * 100 / CARR).__trunc__()
 
 
 def start_ITO():
@@ -173,3 +191,13 @@ def increment_NS():
 def increment_CLL():
     global CLL
     CLL += 1
+
+
+def increment_CARR():
+    global CARR
+    CARR += 1
+
+
+def increment_CARR5():
+    global CARR5
+    CARR5 += 1

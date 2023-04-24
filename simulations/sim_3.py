@@ -12,6 +12,7 @@ T: Time
 TPLL: Time
 TPS: Time
 TE: Time
+Calculated_TA: list[Time]
 
 
 def run_simulation_3(simulation_duration):
@@ -27,7 +28,7 @@ def run_simulation_3(simulation_duration):
 
 
 def set_initial_conditions():
-    global NS, CLL, T, TPLL, TPS, TA, IA, TE
+    global NS, CLL, T, TPLL, TPS, TA, IA, TE, Calculated_TA
     NS = 0
     CLL = 0
     T = Time(0, 0)
@@ -36,6 +37,7 @@ def set_initial_conditions():
     IA = (0, 10)
     TA = (10, 20)
     TE = Time(0, 0)
+    Calculated_TA = []
 
 
 def run_simulation():
@@ -43,6 +45,11 @@ def run_simulation():
         arrive_routine()
     else:
         leave_routine()
+
+
+def set_TPS():
+    global TPS
+    TPS = T + Calculated_TA[0]
 
 
 def arrive_routine():
@@ -56,7 +63,7 @@ def arrive_routine():
         increment_CLL()
         print("Input: ", T)
         if NS == 1:
-            calculate_TA()
+            set_TPS()
 
 
 def regret_routine():
@@ -99,9 +106,10 @@ def calculate_TPLL():
 
 
 def calculate_TA():
-    global TPS
+    global Calculated_TA
     random_number = random.randint(TA[0], TA[1])
-    TPS = T + build_from_minutes(random_number)
+    Calculated_TA.append(build_from_minutes(random_number))
+    print(Calculated_TA)
 
 
 def decrement_NS():

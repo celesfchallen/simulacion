@@ -11,6 +11,7 @@ CLL: int
 T: Time
 TPLL: Time
 TPS: Time
+TE: Time
 
 
 def run_simulation_2(simulation_duration):
@@ -26,7 +27,7 @@ def run_simulation_2(simulation_duration):
 
 
 def set_initial_conditions():
-    global NS, CLL, T, TPLL, TPS, TA, IA
+    global NS, CLL, T, TPLL, TPS, TA, IA, TE
     NS = 0
     CLL = 0
     T = Time(0, 0)
@@ -34,6 +35,7 @@ def set_initial_conditions():
     TPS = high_value_time()
     IA = (0, 10)
     TA = (10, 20)
+    TE = Time(0, 0)
 
 
 def run_simulation():
@@ -48,16 +50,28 @@ def arrive_routine():
     T = TPLL
     calculate_TPLL()
     regrets = regret_routine()
+    calculate_TA()
     if not regrets:
         increment_NS()
         increment_CLL()
         print("Input: ", T)
         if NS == 1:
-            calculate_TPS()
+            calculate_TA()
 
 
 def regret_routine():
-    return False
+    if TE < Time(0, 10):
+        return False
+    r = random.random()
+    if TE > Time(0, 20):
+        if r <= 0.1:
+            return False
+        else:
+            return True
+    if r <= 0.6:
+        return False
+    else:
+        return True
 
 
 def leave_routine():
@@ -65,7 +79,7 @@ def leave_routine():
     T = TPS
     decrement_NS()
     if NS > 0:
-        calculate_TPS()
+        calculate_TA()
     else:
         TPS = high_value_time()
     print("Output: ", T)
@@ -84,7 +98,7 @@ def calculate_TPLL():
     TPLL = TPLL + build_from_minutes(random_number)
 
 
-def calculate_TPS():
+def calculate_TA():
     global TPS
     random_number = random.randint(TA[0], TA[1])
     TPS = T + build_from_minutes(random_number)

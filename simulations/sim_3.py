@@ -14,7 +14,7 @@ TPS: Time
 TE: Time
 
 
-def run_simulation_2(simulation_duration):
+def run_simulation_3(simulation_duration):
     global TPLL
 
     set_initial_conditions()

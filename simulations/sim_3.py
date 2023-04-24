@@ -26,6 +26,8 @@ def run_simulation_3(simulation_duration):
     if NS != 0:
         empty_system()
 
+    print(CLL)
+
 
 def set_initial_conditions():
     global NS, CLL, T, TPLL, TPS, TA, IA, TE, Calculated_TA
@@ -64,6 +66,8 @@ def arrive_routine():
         print("Input: ", T)
         if NS == 1:
             set_TPS()
+    else:
+        update_calculated_TA()
 
 
 def regret_routine():
@@ -81,12 +85,21 @@ def regret_routine():
         return True
 
 
+def update_calculated_TA():
+    global TE
+    TE = TE - Calculated_TA[0]
+    Calculated_TA.pop(0)
+    print(Calculated_TA)
+    print(TE)
+
+
 def leave_routine():
     global T, TPS
     T = TPS
     decrement_NS()
+    update_calculated_TA()
     if NS > 0:
-        calculate_TA()
+        set_TPS()
     else:
         TPS = high_value_time()
     print("Output: ", T)
@@ -106,10 +119,11 @@ def calculate_TPLL():
 
 
 def calculate_TA():
-    global Calculated_TA
+    global TE
     random_number = random.randint(TA[0], TA[1])
-    Calculated_TA.append(build_from_minutes(random_number))
-    print(Calculated_TA)
+    new_TA = build_from_minutes(random_number)
+    Calculated_TA.append(new_TA)
+    TE = TE + new_TA
 
 
 def decrement_NS():

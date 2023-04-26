@@ -4,8 +4,8 @@ import random
 
 NS: int
 
-IA: tuple[int, int]
-TA: tuple[int, int]
+IA_FDP: tuple[int, int]
+TA_FDP: tuple[int, int]
 
 PPS: Time
 PTO: int
@@ -39,7 +39,7 @@ def run_simulation_1(simulation_duration):
 
 
 def set_initial_conditions():
-    global NS, CLL, STLL, STS, ITO, STO, T, TPLL, TPS, TA, IA, PARR5, CARR, CARR5
+    global NS, CLL, STLL, STS, ITO, STO, T, TPLL, TPS, TA_FDP, IA_FDP, PARR5, CARR, CARR5
     NS = 0
     CLL = 0
     STLL = Time(0, 0)
@@ -158,13 +158,13 @@ def end_ITO():
 
 def calculate_TPLL():
     global TPLL
-    random_number = random.randint(IA[0], IA[1])
+    random_number = random.randint(IA_FDP[0], IA_FDP[1])
     TPLL = TPLL + build_from_minutes(random_number)
 
 
 def calculate_TPS():
     global TPS
-    random_number = random.randint(TA[0], TA[1])
+    random_number = random.randint(TA_FDP[0], TA_FDP[1])
     TPS = T + build_from_minutes(random_number)
 
 

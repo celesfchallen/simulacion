@@ -4,16 +4,19 @@ import random
 
 NS: int
 
-IA: tuple[int, int]
-TA: tuple[int, int]
+IA_FDP: tuple[int, int]
+TA_FDP: tuple[int, int]
 
 CLL: int
 T: Time
 TPLL: Time
 TPS: Time
 TE: Time
-NEXT_TA: Time
+TA: Time
 Calculated_TA: list[Time]
+STE: Time
+
+PTE: Time
 
 
 def run_simulation_3(simulation_duration):
@@ -27,21 +30,24 @@ def run_simulation_3(simulation_duration):
     if NS != 0:
         empty_system()
 
-    print(CLL)
+    calculate_PTE()
+    print("Cantidad de personas total:", CLL)
+    print("Promedio de tiempo de espera en la cola:", PTE)
 
 
 def set_initial_conditions():
-    global NS, CLL, T, TPLL, TPS, TA, IA, TE, Calculated_TA, NEXT_TA
+    global NS, CLL, T, TPLL, TPS, TA_FDP, IA_FDP, TE, Calculated_TA, TA, STE
     NS = 0
     CLL = 0
     T = Time(0, 0)
     TPLL = Time(0, 0)
     TPS = high_value_time()
-    IA = (0, 10)
-    TA = (10, 20)
+    IA_FDP = (0, 10)
+    TA_FDP = (10, 20)
     TE = Time(0, 0)
     Calculated_TA = []
-    NEXT_TA = Time(0, 0)
+    TA = Time(0, 0)
+    STE = Time(0, 0)
 
 
 def run_simulation():
@@ -56,11 +62,14 @@ def arrive_routine():
     T = TPLL
     calculate_TPLL()
     regrets = regret_routine()
-    calculate_NEXT_TA()
     if not regrets:
         increment_NS()
         increment_CLL()
-        set_Next_TA()
+        calculate_TA()
+        sum_TE()
+        set_TA()
+
+        print("Calculated TA:", TA)
         print("Input: ", T)
         if NS == 1:
             set_TPS()
@@ -79,6 +88,8 @@ def leave_routine():
 
 
 def regret_routine():
+    print("TIME: ", T)
+    print("TE: ", TE)
     if TE < Time(0, 10):
         return False
     r = random.random()
@@ -91,6 +102,11 @@ def regret_routine():
         return False
     else:
         return True
+
+
+def sum_TE():
+    global STE
+    STE = STE + TE
 
 
 def set_TPS():
@@ -111,22 +127,22 @@ def update_TE():
     Calculated_TA.pop(0)
 
 
-def set_Next_TA():
+def set_TA():
     global TE
-    Calculated_TA.append(NEXT_TA)
-    TE = TE + NEXT_TA
+    Calculated_TA.append(TA)
+    TE = TE + TA
 
 
 def calculate_TPLL():
     global TPLL
-    random_number = random.randint(IA[0], IA[1])
+    random_number = random.randint(IA_FDP[0], IA_FDP[1])
     TPLL = TPLL + build_from_minutes(random_number)
 
 
-def calculate_NEXT_TA():
-    global NEXT_TA
-    random_number = random.randint(TA[0], TA[1])
-    NEXT_TA = build_from_minutes(random_number)
+def calculate_TA():
+    global TA
+    random_number = random.randint(TA_FDP[0], TA_FDP[1])
+    TA = build_from_minutes(random_number)
 
 
 def decrement_NS():
@@ -142,3 +158,8 @@ def increment_NS():
 def increment_CLL():
     global CLL
     CLL += 1
+
+
+def calculate_PTE():
+    global PTE
+    PTE = STE.divide_time_in_parts(CLL)

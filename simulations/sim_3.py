@@ -2,7 +2,7 @@ from time_class import Time, build_from_minutes
 from utils import high_value_time
 import random
 
-NS: int
+TC: int
 
 IA_FDP: tuple[int, int]
 TA_FDP: tuple[int, int]
@@ -10,10 +10,8 @@ TA_FDP: tuple[int, int]
 CLL: int
 T: Time
 TPLL: Time
-TPS: Time
 TE: Time
 TA: Time
-Calculated_TA: list[Time]
 STE: Time
 
 PTE: Time
@@ -25,10 +23,7 @@ def run_simulation_3(simulation_duration):
     set_initial_conditions()
 
     while T < simulation_duration:
-        run_simulation()
-
-    if NS != 0:
-        empty_system()
+        arrive_routine()
 
     calculate_PTE()
     print("Cantidad de personas total:", CLL)
@@ -36,12 +31,10 @@ def run_simulation_3(simulation_duration):
 
 
 def set_initial_conditions():
-    global NS, CLL, T, TPLL, TPS, TA_FDP, IA_FDP, TE, Calculated_TA, TA, STE
-    NS = 0
+    global CLL, T, TPLL, TA_FDP, IA_FDP, TE, Calculated_TA, TA, STE
     CLL = 0
     T = Time(0, 0)
     TPLL = Time(0, 0)
-    TPS = high_value_time()
     IA_FDP = (0, 10)
     TA_FDP = (10, 20)
     TE = Time(0, 0)
@@ -50,20 +43,12 @@ def set_initial_conditions():
     STE = Time(0, 0)
 
 
-def run_simulation():
-    if TPLL <= TPS:
-        arrive_routine()
-    else:
-        leave_routine()
-
-
 def arrive_routine():
     global T
     T = TPLL
     calculate_TPLL()
     regrets = regret_routine()
     if not regrets:
-        increment_NS()
         increment_CLL()
         calculate_TA()
         sum_TE()
@@ -71,20 +56,6 @@ def arrive_routine():
 
         print("Calculated TA:", TA)
         print("Input: ", T)
-        if NS == 1:
-            set_TPS()
-
-
-def leave_routine():
-    global T, TPS
-    T = TPS
-    decrement_NS()
-    update_TE()
-    if NS > 0:
-        set_TPS()
-    else:
-        TPS = high_value_time()
-    print("Output: ", T)
 
 
 def regret_routine():
@@ -143,16 +114,6 @@ def calculate_TA():
     global TA
     random_number = random.randint(TA_FDP[0], TA_FDP[1])
     TA = build_from_minutes(random_number)
-
-
-def decrement_NS():
-    global NS
-    NS -= 1
-
-
-def increment_NS():
-    global NS
-    NS += 1
 
 
 def increment_CLL():

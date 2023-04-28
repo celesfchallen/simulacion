@@ -13,9 +13,9 @@ from simulations.sim_1 import run_simulation_1
 
 Dentro del método main se hace el llamado con los parámetros correspondientes a cada una.
 
-A continuación están los enlaces para ver el detallada cada simulación y qué parámetros necesita.
+A continuación están los enlaces para ver detallada cada simulación con su análisis previo, tablas y diagramas de flujo, y qué parámetros necesita para correrla.
 
-Al final del archivo se detalla que representan los nombres de cada variable en la sección: [Definición de variables].
+Al final del archivo se detalla que representan los nombres de cada variable en la sección: [Definición de variables]
 
 ## Simulaciones
 

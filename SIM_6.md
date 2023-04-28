@@ -74,7 +74,7 @@ Resultado
     Se calcula como CARR20 * 100 / CARR
 
 ###### Tabla de eventos independientes
-![Tabla de eventos independientes](https://github.com/celesfchallen/simulacion/images/icon48.png "Tabla de eventos independientes ej. 6")
+![Tabla de eventos independientes](https://github.com/celesfchallen/simulacion/images/tei6.jpeg "Tabla de eventos independientes ej. 6")
 
 ###### Tabla de eventos futuros
 TPLL

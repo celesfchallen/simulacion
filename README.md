@@ -17,12 +17,16 @@ A continuación están los enlaces para ver el detallada cada simulación y qué
 
 Al final del archivo se detalla que representan los nombres de cada variable en la sección: [Definición de variables].
 
-
-
 ## Simulaciones
 
-- [Simulación 1]
-
+- [Simulación 1] NS - 1 puesto de atención, 1 cola
+- [Simulación 2] NS - 2 puestos de atención, 2 colas
+- [Simulación 3] NS - n puestos de atención, n colas
+- [Simulación 4] NS - n puestos de atención, 1 cola
+- [Simulación 5] NS - 2 puestos de atención, 2 colas con prioridades
+- [Simulación 6] TC - 1 puesto de atención, 1 cola
+- [Simulación 7] TC - 2 puestos de atención, 2 colas
+- [Simulación 8] TC - n puestos de atención, n colas
 
 ## Definición de Variables
 
@@ -43,7 +47,9 @@ Al final del archivo se detalla que representan los nombres de cada variable en 
 - PE = Promedio de espera
 - CQ = Cantidad de personas que no se arrepintieron
 - CARR = Cantidad de personas que se arrepintieron
-- STA = ?
+- STA = Sumatoria de tiempo de atención
+- TC = Tiempo comprometido
 
 [Definición de variables]: https://github.com/celesfchallen/simulacion#definici%C3%B3n-de-variables
 [Simulación 1]: https://github.com/celesfchallen/simulacion/blob/main/SIM_1.md
+[Simulación 6]: https://github.com/celesfchallen/simulacion/blob/main/SIM_6.md

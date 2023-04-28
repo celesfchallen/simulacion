@@ -1,4 +1,4 @@
-## Simulación 3
+## Simulación 6
 
 ### Descripción
 ``Ejercicio 6 de la guía``
@@ -13,3 +13,5 @@ responde a una función normal de Gauss, entre 10 y 20 minutos.
 
 Todos los clientes están dispuestos a esperar hasta 10 minutos, solo el 60%
 espera entre 10 y 20 minutos y el 10% espera más de 20 minutos.
+
+![Diagrama de flujo](https://github.com/celesfchallen/simulacion/images/icon48.png "Diagrama de flujo ej. 6")

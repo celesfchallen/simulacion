@@ -14,7 +14,10 @@ STA: Time
 STO: Time
 TA: Time
 
-PTE: Time
+PE: Time
+PPS: Time
+PTA: Time
+PTO: int
 
 
 def run_simulation_6(simulation_duration):
@@ -34,9 +37,8 @@ def run_simulation_6(simulation_duration):
             else:
                 waitRoutine()
 
-    calculate_PTE()
-    print("Cantidad de personas total:", CLL)
-    print("Promedio de tiempo de espera en la cola:", PTE)
+    calculate_results()
+    show_results()
 
 
 def set_initial_conditions():
@@ -50,11 +52,10 @@ def set_initial_conditions():
     TA_FDP = (10, 20)  # Vamos a usar una equiprobable para no calcular la función de gauss
     STE = Time(0, 0)
     STA = Time(0, 0)
+    STO = Time(0, 0)
 
 
 def regret_routine():
-    print("TIME: ", T)
-    print("TC: ", TC)
     if (TC - T) < Time(0, 10):
         return False
     r = random.random()
@@ -103,6 +104,19 @@ def increment_CLL():
     CLL += 1
 
 
-def calculate_PTE():
-    global PTE
-    PTE = STE.divide_time_in_parts(CLL)
+def calculate_results():
+    global PPS, PTA, PE, PTO
+    PPS = (STE + STA).divide_time_in_parts(CLL)
+    PTA = STA.divide_time_in_parts(CLL)
+    PE = STE.divide_time_in_parts(CLL)
+    PTO = (STO.to_minutes() * 100 / TC.to_minutes()).__trunc__()
+
+
+def show_results():
+    print("Cantidad de personas total:", CLL)
+    print("Promedio de permanencia en el sistema:", PPS)
+    print("Promedio de tiempo de atención:", PTA)
+    print("Promedio de tiempo de espera en la cola:", PE)
+    print("Porcentaje de tiempo ocioso: " + str(PTO) + "%")
+
+

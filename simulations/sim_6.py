@@ -13,6 +13,7 @@ TE: Time
 STE: Time
 STA: Time
 STO: Time
+TA: Time
 
 PTE: Time
 
@@ -29,10 +30,11 @@ def run_simulation_6(simulation_duration):
 
 
 def set_initial_conditions():
-    global CLL, T, TPLL, TA_FDP, IA_FDP, TE, STE, STA, STO, TC
+    global CLL, T, TPLL, TA_FDP, IA_FDP, TE, STE, STA, STO, TC, TA
     CLL = 0
     TC = Time(0, 0)
     T = Time(0, 0)
+    TA = Time(0, 0)
     TPLL = Time(0, 0)
     IA_FDP = (5, 20)
     TA_FDP = (10, 20)  # Vamos a usar una equiprobable para no calcular la función de gauss
@@ -47,8 +49,8 @@ def arrive_routine():
     calculate_TPLL()
     regrets = regret_routine()
     if not regrets:
-        TA = calculate_TA()
-        sum_TA(TA)
+        calculate_TA()
+        sum_TA()
         increment_CLL()
         if TC < T:
             idleTimeRoutine()
@@ -77,16 +79,18 @@ def regret_routine():
 
 
 def idleTimeRoutine():
-    pass
+    global STO, TC
+    STO = STO + (T - TC)
+    TC = T + TA
 
 
 def waitRoutine():
     pass
 
 
-def sum_TA(ta):
+def sum_TA():
     global STA
-    STA = STA + ta
+    STA = STA + TA
 
 
 def sum_TE():
@@ -101,8 +105,9 @@ def calculate_TPLL():
 
 
 def calculate_TA():
+    global TA
     random_number = random.randint(TA_FDP[0], TA_FDP[1])
-    return build_from_minutes(random_number)
+    TA = build_from_minutes(random_number)
 
 
 def increment_CLL():

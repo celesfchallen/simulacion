@@ -1,5 +1,4 @@
 from time_class import Time, build_from_minutes
-from utils import high_value_time
 import random
 
 TC: Time
@@ -19,8 +18,6 @@ PTE: Time
 
 
 def run_simulation_6(simulation_duration):
-    global TPLL
-
     set_initial_conditions()
 
     while T < simulation_duration:
@@ -41,6 +38,7 @@ def set_initial_conditions():
     TA_FDP = (10, 20)  # Vamos a usar una equiprobable para no calcular la función de gauss
     TE = Time(0, 0)
     STE = Time(0, 0)
+    STA = Time(0, 0)
 
 
 def arrive_routine():
@@ -49,9 +47,13 @@ def arrive_routine():
     calculate_TPLL()
     regrets = regret_routine()
     if not regrets:
+        TA = calculate_TA()
+        sum_TA(TA)
         increment_CLL()
-        calculate_TA()
-        sum_TE()
+        if TC < T:
+            idleTimeRoutine()
+        else:
+            waitRoutine()
 
         print("Calculated TA:", TA)
         print("Input: ", T)
@@ -74,6 +76,19 @@ def regret_routine():
         return True
 
 
+def idleTimeRoutine():
+    pass
+
+
+def waitRoutine():
+    pass
+
+
+def sum_TA(ta):
+    global STA
+    STA = STA + ta
+
+
 def sum_TE():
     global STE
     STE = STE + TE
@@ -86,9 +101,8 @@ def calculate_TPLL():
 
 
 def calculate_TA():
-    global TA
     random_number = random.randint(TA_FDP[0], TA_FDP[1])
-    TA = build_from_minutes(random_number)
+    return build_from_minutes(random_number)
 
 
 def increment_CLL():

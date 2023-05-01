@@ -13,11 +13,13 @@ STE: Time
 STA: Time
 STO: Time
 TA: Time
+CE15: int
 
 PE: Time
 PPS: Time
 PTA: Time
 PTO: int
+PE15: int
 
 
 def run_simulation_6(simulation_duration):
@@ -42,7 +44,7 @@ def run_simulation_6(simulation_duration):
 
 
 def set_initial_conditions():
-    global CLL, T, TPLL, TA_FDP, IA_FDP, STE, STA, STO, TC, TA
+    global CLL, T, TPLL, TA_FDP, IA_FDP, STE, STA, STO, TC, TA, CE15
     CLL = 0
     TC = Time(0, 0)
     T = Time(0, 0)
@@ -53,6 +55,7 @@ def set_initial_conditions():
     STE = Time(0, 0)
     STA = Time(0, 0)
     STO = Time(0, 0)
+    CE15 = 0
 
 
 def regret_routine():
@@ -61,10 +64,13 @@ def regret_routine():
     r = random.random()
     if (TC - T) > Time(0, 20):
         if r <= 0.1:
+            increment_CE15()
             return False
         else:
             return True
     if r <= 0.6:
+        if (TC - T) > Time(0, 15):
+            increment_CE15()
         return False
     else:
         return True
@@ -104,12 +110,18 @@ def increment_CLL():
     CLL += 1
 
 
+def increment_CE15():
+    global CE15
+    CE15 += 1
+
+
 def calculate_results():
-    global PPS, PTA, PE, PTO
+    global PPS, PTA, PE, PTO, PE15
     PPS = (STE + STA).divide_time_in_parts(CLL)
     PTA = STA.divide_time_in_parts(CLL)
     PE = STE.divide_time_in_parts(CLL)
     PTO = (STO.to_minutes() * 100 / TC.to_minutes()).__trunc__()
+    PE15 = ((CE15 * 100) / CLL).__trunc__()
 
 
 def show_results():
@@ -118,5 +130,7 @@ def show_results():
     print("Promedio de tiempo de atención:", PTA)
     print("Promedio de tiempo de espera en la cola:", PE)
     print("Porcentaje de tiempo ocioso: " + str(PTO) + "%")
+    print("Porcentaje que esperaron más de 15' respecto del total atendidas: " + str(PE15) + "%")
+
 
 

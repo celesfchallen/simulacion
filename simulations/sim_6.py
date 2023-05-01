@@ -22,6 +22,7 @@ PTO: int
 PE15: int
 CARR: int
 CARR20: int
+PARR20: int
 
 
 def run_simulation_6(simulation_duration):
@@ -133,12 +134,13 @@ def increment_CARR20():
 
 
 def calculate_results():
-    global PPS, PTA, PE, PTO, PE15
+    global PPS, PTA, PE, PTO, PE15, PARR20
     PPS = (STE + STA).divide_time_in_parts(CLL)
     PTA = STA.divide_time_in_parts(CLL)
     PE = STE.divide_time_in_parts(CLL)
     PTO = (STO.to_minutes() * 100 / TC.to_minutes()).__trunc__()
     PE15 = ((CE15 * 100) / CLL).__trunc__()
+    PARR20 = ((CARR20 * 100) / CARR).__trunc__()
 
 
 def show_results():
@@ -148,6 +150,6 @@ def show_results():
     print("Promedio de tiempo de espera en la cola:", PE)
     print("Porcentaje de tiempo ocioso: " + str(PTO) + "%")
     print("Porcentaje que esperaron más de 15' respecto del total atendidas: " + str(PE15) + "%")
-
+    print("Porcentaje de arrepentidos que tenían que esperar más de 20': " + str(PARR20) + "%")
 
 

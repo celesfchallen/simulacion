@@ -71,12 +71,15 @@ def regret_routine():
             increment_CE15()
             return False
         else:
+            increment_CARR20()
+            increment_CARR()
             return True
     if r <= 0.6:
         if (TC - T) > Time(0, 15):
             increment_CE15()
         return False
     else:
+        increment_CARR()
         return True
 
 
@@ -117,6 +120,16 @@ def increment_CLL():
 def increment_CE15():
     global CE15
     CE15 += 1
+
+
+def increment_CARR():
+    global CARR
+    CARR += 1
+
+
+def increment_CARR20():
+    global CARR20
+    CARR20 += 1
 
 
 def calculate_results():

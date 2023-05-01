@@ -20,6 +20,8 @@ PPS: Time
 PTA: Time
 PTO: int
 PE15: int
+CARR: int
+CARR20: int
 
 
 def run_simulation_6(simulation_duration):
@@ -44,7 +46,7 @@ def run_simulation_6(simulation_duration):
 
 
 def set_initial_conditions():
-    global CLL, T, TPLL, TA_FDP, IA_FDP, STE, STA, STO, TC, TA, CE15
+    global CLL, T, TPLL, TA_FDP, IA_FDP, STE, STA, STO, TC, TA, CE15, CARR, CARR20
     CLL = 0
     TC = Time(0, 0)
     T = Time(0, 0)
@@ -56,6 +58,8 @@ def set_initial_conditions():
     STA = Time(0, 0)
     STO = Time(0, 0)
     CE15 = 0
+    CARR = 0
+    CARR20 = 0
 
 
 def regret_routine():

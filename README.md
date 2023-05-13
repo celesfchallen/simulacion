@@ -51,5 +51,6 @@ Al final del archivo se detalla que representan los nombres de cada variable en 
 - TC = Tiempo comprometido
 
 [Definición de variables]: https://github.com/celesfchallen/simulacion#definici%C3%B3n-de-variables
-[Simulación 1]: https://github.com/celesfchallen/simulacion/blob/main/SIM_1.md
-[Simulación 6]: https://github.com/celesfchallen/simulacion/blob/main/SIM_6.md
+[Simulación 1]: https://github.com/celesfchallen/simulacion/blob/main/simulations_readme/SIM_1.md
+[Simulación 1]: https://github.com/celesfchallen/simulacion/blob/main/simulations_readme/SIM_2.md
+[Simulación 6]: https://github.com/celesfchallen/simulacion/blob/main/simulations_readme/SIM_6.md

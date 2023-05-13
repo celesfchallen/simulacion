@@ -74,10 +74,12 @@ Resultado
     Se calcula como CARR20 * 100 / CARR
 
 ###### Tabla de eventos independientes
-![Tabla de eventos independientes](https://raw.githubusercontent.com/celesfchallen/simulacion/main/images/tei6.jpeg?token=GHSAT0AAAAAACAQX3P7FJUS4SAEHN5TOMAKZCML6BQ "Tabla de eventos independientes ej. 6")
+![Tabla de eventos independientes](https://raw.githubusercontent.com/celesfchallen/simulacion/main/images/tei6.jpeg "Tabla de eventos independientes ej. 6")
 
 ###### Tabla de eventos futuros
 TPLL
 
 ###### Diagrama de flujo
-![Diagrama de flujo](https://github.com/celesfchallen/simulacion/images/icon48.png "Diagrama de flujo ej. 6")
+![Diagrama de flujo](https://raw.githubusercontent.com/celesfchallen/simulacion/main/images/df1_6.jpeg "Diagrama de flujo ej. 6 pt 1")
+
+![Diagrama de flujo](https://raw.githubusercontent.com/celesfchallen/simulacion/main/images/df2_6.jpeg "Diagrama de flujo ej. 6 pt2")

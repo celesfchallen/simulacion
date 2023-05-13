@@ -151,5 +151,3 @@ def show_results():
     print("Porcentaje de tiempo ocioso: " + str(PTO) + "%")
     print("Porcentaje que esperaron más de 15' respecto del total atendidas: " + str(PE15) + "%")
     print("Porcentaje de arrepentidos que tenían que esperar más de 20': " + str(PARR20) + "%")
-
-
